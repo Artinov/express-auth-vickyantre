@@ -11,5 +11,7 @@ $("#loginButton").click(function() {
         },
     }).then(function(res) {
         console.log(res);
+
+        // Handle response here
     })
 });

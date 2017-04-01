@@ -1,10 +1,12 @@
 var express = require("express");
-var path = require('path');
 var app = express();
+
+var path = require('path');
 var users = require('./users.json');
 var bodyParser = require('body-parser');
 
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }))
 
 app.use('/', express.static(path.join(__dirname, 'public')))
 
@@ -13,16 +15,15 @@ app.get('/about', function(req, res) {
 });
 
 app.post('/login', function(req, res) {
-    console.log(req.body);
-    res.send("This is login route");
+    console.log(req.body); // This your request data
+
+    /*
+     * Write your auth logic here
+     */
+
+    res.send("This is auth route");
 });
 
-// /book/19/JohnDoe/Something
-app.get('/book/:century/:author/:bookName', function(req, res) {
-    var reqData = req.params;
-    res.send("You've viewing book '" + reqData.bookName + "' written " + reqData.author + " in " + reqData.century + " century ");
-})
-
 app.listen(3000, function() {
-    console.log("Server started");
+    console.log("Server is working on http://localhost:3000/");
 });
