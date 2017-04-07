@@ -15,13 +15,18 @@ app.get('/about', function(req, res) {
 });
 
 app.post('/login', function(req, res) {
-    console.log(req.body); // This your request data
+    console.log(req.body);
 
-    /*
-     * Write your auth logic here
-     */
+    var authUsers = users.filter(function(user) {
+    	return (user.login == req.body.login && user.password == req.body.password);
+    });
 
-    res.send("This is auth route");
+    if (authUsers.length > 0) {
+    	res.send({success: true})
+    } else {
+    	res.send({sucess: false})
+    }
+
 });
 
 app.listen(3000, function() {
